@@ -1,0 +1,13 @@
+services:
+  open-tooling-crm:
+    build: .
+    ports:
+      - "8787:8787"
+    volumes:
+      - crm-data:/data
+    environment:
+      - PORT=8787
+      - CRM_DB_PATH=/data/crm.db
+
+volumes:
+  crm-data:
