@@ -15,6 +15,8 @@ import {
   listRelationships,
   searchEntities,
   countEntities,
+  countRelationships,
+  countEvents,
   storeIdempotentResponse,
   traverseGraph,
   updateEntity,
@@ -218,7 +220,8 @@ app.get("/relationships", (req, res) => {
   const limit = req.query.limit ? Number(req.query.limit) : 50;
   const offset = req.query.offset ? Number(req.query.offset) : 0;
   const relationships = listRelationships({ entity_id, type, limit, offset });
-  return res.json({ relationships });
+  const total = countRelationships({ entity_id, type });
+  return res.json(paginated(relationships, total, limit, offset));
 });
 
 app.delete("/relationships/:id", (req, res) => {
@@ -301,7 +304,8 @@ app.get("/events", (req, res) => {
   const offset = req.query.offset ? Number(req.query.offset) : 0;
 
   const events = listEvents(entity_id, limit, offset);
-  return res.json({ events });
+  const total = countEvents(entity_id);
+  return res.json(paginated(events, total, limit, offset));
 });
 
 // ── Artifacts ──────────────────────────────────────────────────────

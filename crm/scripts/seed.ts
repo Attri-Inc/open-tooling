@@ -64,8 +64,8 @@ const widgetsDeal = createEntity({
 createRelationship({ from_id: alice.id, to_id: acme.id, type: "EMPLOYED_AT" }, { actor: "seed-script" });
 createRelationship({ from_id: bob.id, to_id: acme.id, type: "EMPLOYED_AT" }, { actor: "seed-script" });
 createRelationship({ from_id: carol.id, to_id: widgets.id, type: "EMPLOYED_AT" }, { actor: "seed-script" });
-createRelationship({ from_id: acme.id, to_id: acmeDeal.id, type: "ASSOCIATED_WITH" }, { actor: "seed-script" });
-createRelationship({ from_id: widgets.id, to_id: widgetsDeal.id, type: "ASSOCIATED_WITH" }, { actor: "seed-script" });
+createRelationship({ from_id: acme.id, to_id: acmeDeal.id, type: "OWNS" }, { actor: "seed-script" });
+createRelationship({ from_id: widgets.id, to_id: widgetsDeal.id, type: "OWNS" }, { actor: "seed-script" });
 createRelationship({ from_id: alice.id, to_id: acmeDeal.id, type: "ASSOCIATED_WITH" }, { actor: "seed-script" });
 createRelationship({ from_id: carol.id, to_id: widgetsDeal.id, type: "ASSOCIATED_WITH" }, { actor: "seed-script" });
 

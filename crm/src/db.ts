@@ -503,10 +503,10 @@ export function updateEntity(
   const updated: Entity = {
     ...current,
     properties: nextProperties,
-    summary: patch.summary ?? current.summary ?? null,
-    confidence: patch.confidence ?? current.confidence ?? null,
-    verification: patch.verification ?? current.verification ?? null,
-    provenance: patch.provenance ?? current.provenance ?? null,
+    summary: "summary" in patch ? (patch.summary ?? null) : (current.summary ?? null),
+    confidence: "confidence" in patch ? (patch.confidence ?? null) : (current.confidence ?? null),
+    verification: "verification" in patch ? (patch.verification ?? null) : (current.verification ?? null),
+    provenance: "provenance" in patch ? (patch.provenance ?? null) : (current.provenance ?? null),
     status: patch.status ?? current.status,
     updated_at: nowIso(),
   };
@@ -613,6 +613,22 @@ export function listRelationships(params: {
   values.push(limit, offset);
 
   return getDb().prepare(sql).all(...values).map(toRelationship);
+}
+
+export function countRelationships(params: { entity_id?: string; type?: string }): number {
+  const where: string[] = [];
+  const values: unknown[] = [];
+  if (params.entity_id) {
+    where.push("(from_id = ? OR to_id = ?)");
+    values.push(params.entity_id, params.entity_id);
+  }
+  if (params.type) {
+    where.push("type = ?");
+    values.push(params.type);
+  }
+  const sql = `SELECT COUNT(*) as cnt FROM relationships ${where.length ? `WHERE ${where.join(" AND ")}` : ""}`;
+  const row = getDb().prepare(sql).get(...values) as { cnt: number };
+  return row.cnt;
 }
 
 export function deleteRelationship(id: string, context?: ActorContext): boolean {
@@ -822,6 +838,13 @@ export function listEvents(entityId: string, limit = 50, offset = 0) {
     )
     .all(entityId, limit, offset);
   return rows.map(toEvent);
+}
+
+export function countEvents(entityId: string): number {
+  const row = getDb()
+    .prepare("SELECT COUNT(*) as cnt FROM events WHERE entity_id = ?")
+    .get(entityId) as { cnt: number };
+  return row.cnt;
 }
 
 // ── Idempotency ────────────────────────────────────────────────────

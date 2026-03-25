@@ -62,7 +62,7 @@ function validateArgs<T>(schema: ZodSchema<T>, args: unknown): T {
 const server = new Server(
   {
     name: "open-tooling-crm",
-    version: "0.1.0",
+    version: "1.0.0",
   },
   {
     capabilities: {

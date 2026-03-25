@@ -207,7 +207,7 @@ Directed edges between entities: `EMPLOYED_AT`, `ASSOCIATED_WITH`, `OWNS`, `INTE
 
 All list endpoints return paginated responses: `{ items, total, limit, offset, has_more }`.
 
-Write endpoints support idempotency via `x-idempotency-key` header.
+Write endpoints support idempotency via `idempotency-key` header.
 
 ---
 

@@ -9,12 +9,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: crm
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: crm/package-lock.json
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm test
