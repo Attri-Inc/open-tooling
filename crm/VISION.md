@@ -53,6 +53,16 @@ The fastest path to a working frontend:
 
 3. **Use the MCP tools for a conversational UI.** If you'd rather interact through chat than clicks, connect Open Tooling CRM's MCP server to Claude Desktop. You get a full CRM interface through natural language — no frontend code needed.
 
+## Part of Open Tooling
+
+Open Tooling CRM is the first module in the **Open Tooling** family — a growing suite of open-source, AI-native SaaS tools that share the same architectural DNA: headless, local-first, evidence-based, and designed for agents as the primary interface.
+
+CRM is the starting point because it touches every business. But the same patterns — typed entities, structured memory, MCP tooling, workflow-specific configurability — apply across the enterprise stack. Next up: **HR** (people ops, hiring, onboarding), **Finance** (invoicing, expense tracking, reporting), **Project Management** (tasks, sprints, resource allocation), and **Legal** (contract lifecycle, compliance tracking).
+
+Each module is standalone — you can use CRM without any of the others. But together they form an integrated, agent-operated back office where data flows across modules with full provenance and no vendor lock-in.
+
+Explore the full family at [github.com/Attri-Inc/open-tooling](https://github.com/Attri-Inc/open-tooling).
+
 ## Non-Goals (Initial OSS Release)
 1. Hosted sync or multi-tenant SaaS.
 2. Email/calendar ingestion and enrichment connectors (provide extension points instead).

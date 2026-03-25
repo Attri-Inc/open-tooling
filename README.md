@@ -9,8 +9,10 @@ Open Tooling is a family of headless, local-first business tools designed for AI
 | Module | Description | Status |
 |--------|-------------|--------|
 | [**CRM**](./crm) | Agent-first CRM with evidence-based memory, 29 REST endpoints, 27 MCP tools | v1.0 |
-| **HR** | AI-native human resources and people ops | Planned |
-| **Finance** | AI-native financial operations and reporting | Planned |
+| **HR** | AI-native human resources, hiring, and onboarding | Planned |
+| **Finance** | AI-native invoicing, expense tracking, and reporting | Planned |
+| **Project Management** | AI-native tasks, sprints, and resource allocation | Planned |
+| **Legal** | AI-native contract lifecycle and compliance tracking | Planned |
 
 ## Plugin Marketplace
 
