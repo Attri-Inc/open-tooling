@@ -57,7 +57,7 @@ The fastest path to a working frontend:
 
 Open Tooling CRM is the first module in the **Open Tooling** family — a growing suite of open-source, AI-native SaaS tools that share the same architectural DNA: headless, local-first, evidence-based, and designed for agents as the primary interface.
 
-CRM is the starting point because it touches every business. But the same patterns — typed entities, structured memory, MCP tooling, workflow-specific configurability — apply across the enterprise stack. Next up: **HR** (people ops, hiring, onboarding), **Finance** (invoicing, expense tracking, reporting), **Project Management** (tasks, sprints, resource allocation), and **Legal** (contract lifecycle, compliance tracking).
+CRM is the starting point because it touches every business. But the same patterns — typed entities, structured memory, MCP tooling, workflow-specific configurability — apply across the enterprise stack. Future modules will cover verticals like HR, Finance, Project Management, and Procurement, with more to follow.
 
 Each module is standalone — you can use CRM without any of the others. But together they form an integrated, agent-operated back office where data flows across modules with full provenance and no vendor lock-in.
 
