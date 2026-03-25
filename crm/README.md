@@ -1,9 +1,8 @@
 # Open Tooling CRM
 
-**The CRM where agents are the UI.**
+**Enterprise SaaS was built for humans. AI agents need new infrastructure.**
 
-Open-source, local-first CRM built for AI agents. Fully configurable to your workflow.
-SQLite-backed. REST API + MCP server. Evidence-first memory.
+Open-source, agent-first CRM with evidence-based memory, 27 MCP tools, and zero vendor lock-in. Every claim has receipts.
 
 <!-- badges -->
 [![Build](https://github.com/Attri-Inc/open-tooling/actions/workflows/ci.yml/badge.svg)](https://github.com/Attri-Inc/open-tooling/actions)
@@ -14,13 +13,19 @@ SQLite-backed. REST API + MCP server. Evidence-first memory.
 <!-- TODO: Add 30-second demo GIF here showing Claude Desktop using Open Tooling CRM MCP tools -->
 <!-- Record with Rekort or asciinema: create contact → ingest email → extract observations → generate brief -->
 
-> Part of [Open Tooling](https://github.com/Attri-Inc/open-tooling) — AI-native open-source SaaS tools.
+> Part of [Open Tooling](https://github.com/Attri-Inc/open-tooling) — AI-native open-source SaaS tools. See also: [Claude plugin marketplace](https://github.com/Attri-Inc/open-tooling-plugins).
 
 ---
 
-## Why Open Tooling CRM?
+## The Problem
 
-Traditional CRMs are built for humans clicking buttons. AI agent frameworks are built for orchestration, not data persistence. Open Tooling CRM fills the gap: a system of record designed from the ground up for agents.
+Traditional CRMs are built for humans clicking buttons in a web app. AI agents need structured, typed, deterministic access to data. They need to ingest raw evidence — emails, transcripts, documents — and extract verifiable claims. They need to know *why* they believe something, not just *what* they believe.
+
+Bolting AI features onto a human-first architecture doesn't fix the fundamental mismatch.
+
+## The Solution
+
+Open Tooling CRM is a system of record designed from the ground up for AI agents. No UI. No cloud. Just a clean data layer with evidence-based memory and two interfaces: a REST API and an MCP server.
 
 | | **Open Tooling CRM** | **Twenty** | **Salesforce** | **SuiteCRM** |
 |---|---|---|---|---|
@@ -40,43 +45,39 @@ Traditional CRMs are built for humans clicking buttons. AI agent frameworks are 
 ```bash
 npm install
 cp .env.example .env
-npm run dev
+npm run dev          # REST API at localhost:8787
+npm run seed         # Sample data (optional)
 ```
 
-Server starts at `http://localhost:8787`.
-
-```bash
-npm run seed    # Populate with sample CRM data
-```
-
-### Run with Docker
+### With Docker
 
 ```bash
 docker compose up --build
 ```
 
-Data persists in a named volume (`crm-data`).
+### With Claude (Recommended)
+
+Install the [Open Tooling CRM plugin](https://github.com/Attri-Inc/open-tooling-plugins) for Claude Cowork or Claude Code. Run `/crm-setup` and Claude handles everything — clone, install, seed, MCP wiring. Or just ask Claude to "use Open Tooling CRM" and it kicks off setup automatically.
 
 ---
 
-## Built for the Agent Era
+## Evidence-Based Memory
 
-Open Tooling CRM is designed around five pillars:
+This is the core differentiator. Instead of flat fields that get overwritten, Open Tooling CRM uses a structured evidence chain:
 
-### 1. Agent-First
-No human UI. The REST API (29 endpoints) and MCP server (27 tools) are the only interfaces. Agents don't need buttons — they need structured, typed, deterministic access to data.
+```
+Artifacts (raw evidence: emails, transcripts, documents)
+    ↓ extraction
+Observations (typed claims with lifecycle: current → superseded / retracted)
+    ↓ derivation
+Briefs (summaries that cite observations — always regeneratable)
+    ↓ detection
+Conflicts (when observations disagree — never silently resolved)
+```
 
-### 2. Evidence-First Memory
-Every claim traces back to raw evidence. The memory layer follows a structured chain: **Artifacts** (raw evidence like emails and transcripts) → **Observations** (typed claims with lifecycle management) → **Briefs** (derived summaries citing observations) → **Conflicts** (explicit disagreement records). No opaque summaries. No hallucination-friendly black boxes.
+When an agent says "the deal is worth $250K," you can trace that claim through the observation to the exact email where the prospect confirmed it. When the budget changes, the old observation is superseded, not deleted. The audit trail is preserved.
 
-### 3. Local-First
-SQLite-backed, zero cloud dependencies. Runs on your machine or self-hosts on your own infrastructure (GCP, AWS, etc.) at a fraction of per-seat SaaS costs. Your data stays yours.
-
-### 4. MCP-Native
-Designed for the Model Context Protocol ecosystem. 27 tools purpose-built for Claude Desktop, Claude Code, and any MCP-compatible client. Plug-and-play with the fastest-growing agent integration standard.
-
-### 5. Composable & Configurable
-Pure data layer — bring your own agents, LLMs, and workflows. Works with LangChain, CrewAI, AutoGen, or custom agents. Configure entity types, properties, and integrations for your specific domain. A masonry contractor tracks projects and bids; a SaaS company tracks accounts and ARR. Same core, different configuration.
+**Progressive retrieval:** Agents start with a brief and drill down to raw evidence only when needed — keeping context windows lean while maintaining full traceability.
 
 ---
 
@@ -105,7 +106,7 @@ Both interfaces share the same core. All writes produce immutable events in the 
 
 ---
 
-## MCP Server (Claude Desktop / Claude Code)
+## MCP Server (27 Tools)
 
 ```bash
 npm run mcp
@@ -127,7 +128,7 @@ Add to your MCP client config:
 }
 ```
 
-### MCP Tools (27)
+> **Easier way:** Install the [Claude plugin](https://github.com/Attri-Inc/open-tooling-plugins) and run `/crm-setup` — it auto-configures the MCP server for you.
 
 **Entities:** `create_entity`, `update_entity`, `get_entity`, `search_entities`, `archive_entity`
 
@@ -147,13 +148,33 @@ Add to your MCP client config:
 
 ---
 
+## Configure It To Your Workflow
+
+Open Tooling CRM is a universal foundation, not a finished product. Define your entity types and properties, wire up your integrations, deploy for your domain.
+
+A masonry contractor tracks projects, bids, and superintendents. A SaaS company tracks accounts, ARR, and renewal dates. A recruiting firm tracks candidates, roles, and placements. The data model is the same — typed entities with JSON properties, relationships, and an evidence layer — but the configuration is entirely yours.
+
+---
+
+## Intentionally Headless
+
+No bundled UI is a deliberate architectural choice. Traditional CRMs couple their data layer to a rigid frontend. Open Tooling inverts this: the data layer and agent tooling are the product. The interface is whatever you want.
+
+**Three ways to use it:**
+
+1. **Agent-only.** Connect the MCP server to Claude Desktop or any MCP client. Your CRM interface is natural language.
+2. **Vibe-code a frontend.** Tell Claude or Cursor: "Build me a React dashboard for my deals pipeline using the Open Tooling CRM API at localhost:8787." The API is conventional enough that any code-gen tool can scaffold a working UI in minutes.
+3. **Integrate into your stack.** It's a REST API with 29 endpoints — connect it to anything.
+
+---
+
 ## Data Model
 
 ### Entities
 Typed records: `contact`, `company`, `deal`, `interaction`, `task`, `agent`. JSON properties, status tracking, optional confidence and verification scores.
 
 ### Relationships
-Directed edges between entities: `EMPLOYED_AT`, `ASSOCIATED_WITH`, `OWNS`, `INTERACTED_WITH`, `CREATED_BY`, `RELATED_TO`.
+Directed edges: `EMPLOYED_AT`, `ASSOCIATED_WITH`, `OWNS`, `INTERACTED_WITH`, `CREATED_BY`, `RELATED_TO`.
 
 ### Memory Layer
 
@@ -165,14 +186,13 @@ Directed edges between entities: `EMPLOYED_AT`, `ASSOCIATED_WITH`, `OWNS`, `INTE
 | **Conflict** | Explicit record when observations disagree. Requires resolution |
 
 ### Supporting
-
 - **Event Ledger** — append-only audit trail for every mutation, with actor context
 - **Field Provenance** — per-field source tracking
 - **FTS Index** — full-text search across entity properties
 
 ---
 
-## REST API
+## REST API (29 Endpoints)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -237,6 +257,22 @@ src/
 
 ---
 
+## Part of Open Tooling
+
+Open Tooling CRM is the first module in the **Open Tooling** family — open-source, AI-native SaaS tools that share the same architectural DNA: headless, local-first, evidence-based, and designed for agents.
+
+CRM is the starting point because it touches every business. The same patterns apply across the enterprise stack. Future modules will cover HR, Finance, Project Management, Procurement, and more — each standalone but interoperable.
+
+| Resource | Link |
+|----------|------|
+| **Core tools** | [Attri-Inc/open-tooling](https://github.com/Attri-Inc/open-tooling) |
+| **Claude plugin marketplace** | [Attri-Inc/open-tooling-plugins](https://github.com/Attri-Inc/open-tooling-plugins) |
+| **Vision & architecture** | [VISION.md](./VISION.md) |
+
+---
+
 ## License
 
 Apache 2.0
+
+Built by [Attri AI](https://github.com/Attri-Inc).
