@@ -10,8 +10,7 @@ Open-source, agent-first CRM with evidence-based memory, 27 MCP tools, and zero 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-27%20tools-purple)](https://modelcontextprotocol.io)
 
-<!-- TODO: Add 30-second demo GIF here showing Claude Desktop using Open Tooling CRM MCP tools -->
-<!-- Record with Rekort or asciinema: create contact → ingest email → extract observations → generate brief -->
+![CRM Setup Demo](https://raw.githubusercontent.com/Attri-Inc/open-tooling-plugins/main/assets/crm-setup-demo.gif)
 
 > Part of [Open Tooling](https://github.com/Attri-Inc/open-tooling) — AI-native open-source SaaS tools. See also: [Claude plugin marketplace](https://github.com/Attri-Inc/open-tooling-plugins).
 
@@ -268,6 +267,18 @@ CRM is the starting point because it touches every business. The same patterns a
 | **Core tools** | [Attri-Inc/open-tooling](https://github.com/Attri-Inc/open-tooling) |
 | **Claude plugin marketplace** | [Attri-Inc/open-tooling-plugins](https://github.com/Attri-Inc/open-tooling-plugins) |
 | **Vision & architecture** | [VISION.md](./VISION.md) |
+
+---
+
+## Compatibility
+
+Open Tooling CRM works with any MCP-compatible AI client, including Claude Desktop, Claude Cowork, Claude Code, [OpenClaw](https://openclaw.com), and more.
+
+---
+
+## Support
+
+For help setting it up, custom implementations, or building automations on Open Tooling CRM, contact [hello@attri.ai](mailto:hello@attri.ai).
 
 ---
 
