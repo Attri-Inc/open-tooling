@@ -12,6 +12,12 @@ Open Tooling is a family of headless, local-first business tools designed for AI
 
 More modules coming — covering verticals like HR, Finance, Project Management, Procurement, and beyond.
 
+## See It in Action
+
+![CRM Setup Demo](https://raw.githubusercontent.com/Attri-Inc/open-tooling-plugins/main/assets/crm-setup-demo.gif)
+
+> From zero to a running CRM in under two minutes. Install the plugin, clone the repo, and Claude configures everything.
+
 ## Plugin Marketplace
 
 Install the [Open Tooling Plugins](https://github.com/Attri-Inc/open-tooling-plugins) in Claude Desktop or Cowork for instant agent-ready workflows:
@@ -38,6 +44,14 @@ cd open-tooling/crm
 npm install && cp .env.example .env
 npm run dev
 ```
+
+## Compatibility
+
+Open Tooling works with any MCP-compatible AI client, including Claude Desktop, Claude Cowork, Claude Code, [OpenClaw](https://openclaw.com), and more.
+
+## Support
+
+For help setting things up, custom implementations, or building automations on Open Tooling, contact [hello@attri.ai](mailto:hello@attri.ai).
 
 ## License
 
